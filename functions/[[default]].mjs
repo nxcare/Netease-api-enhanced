@@ -5,8 +5,8 @@ import { createRequire } from 'node:module';
 
 // 兼容层
 const require = createRequire(import.meta.url);
-const { serveNcmApi } = require('../../server.js');
-const generateConfig = require('../../generateConfig.js');
+const { serveNcmApi } = require('../server.js');
+const generateConfig = require('../generateConfig.js');
 
 // 1. 定义一个全局变量缓存 App 实例
 // 这样只有第一次请求会初始化，后续请求会直接复用（热启动）
