@@ -7,8 +7,8 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
 // 2. 引入原来的核心逻辑
-const { serveNcmApi } = require('../server.js');
-const generateConfig = require('../generateConfig.js');
+const { serveNcmApi } = require('../../server.js');
+const generateConfig = require('../../generateConfig.js');
 
 // 3. 处理临时文件 (照搬原 app.js 的逻辑)
 const tmpPath = os.tmpdir();
