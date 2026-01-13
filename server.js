@@ -318,7 +318,7 @@ async function consturctServer(moduleDefs) {
 
 /**
  * Serve the NCM API.
- * @param {NcmApiOptions} options
+ * @param {NcmApiOptions & { skipListen?: boolean }} options // 修改注释
  * @returns {Promise<import('express').Express & ExpressExtension>}
  */
 async function serveNcmApi(options) {
@@ -343,6 +343,14 @@ async function serveNcmApi(options) {
 
   /** @type {import('express').Express & ExpressExtension} */
   const appExt = app
+
+  // ------------------ 修改开始 ------------------
+  // 如果传入了 skipListen: true，则直接返回 app，不监听端口
+  if (options.skipListen) {
+    return appExt
+  }
+  // ------------------ 修改结束 ------------------
+
   appExt.server = app.listen(port, host, () => {
     console.log(`
    _   _  _____ __  __  
@@ -352,7 +360,7 @@ async function serveNcmApi(options) {
   | |\\  | |____| |  | | 
   |_| \\_|\\_____|_|  |_|
     `)
-    console.log(`
+        console.log(`
     ╔═╗╔═╗╦    ╔═╗╔╗╔╦ ╦╔═╗╔╗╔╔═╗╔═╗╔╦╗
     ╠═╣╠═╝║    ║╣ ║║║╠═╣╠═╣║║║║  ║╣  ║║
     ╩ ╩╩  ╩    ╚═╝╝╚╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝═╩╝
